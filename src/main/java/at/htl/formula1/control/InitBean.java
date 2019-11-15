@@ -46,7 +46,7 @@ public class InitBean {
 
         readTeamsAndDriversFromFile(TEAM_FILE_NAME);
         readRacesFromFile(RACES_FILE_NAME);
-        //client.readResultsFromEndpoint();
+        client.readResultsFromEndpoint();
 
     }
 
@@ -114,10 +114,16 @@ public class InitBean {
      */
 
     private void persistTeamAndDrivers(String[] line) {
-        Team team = new Team(line[0]);
-        em.persist(team);
-        em.persist(new Driver(line[1],team));
-        em.persist(new Driver(line[2],team));
+
+        //if(em.createNamedQuery("Team.findExistingTeam", Team.class).setParameter("NAME",line[0]).getSingleResult() == null){
+
+
+            Team  team = new Team(line[0]);
+            em.persist(team);
+            em.persist(new Driver(line[1],team));
+            em.persist(new Driver(line[2],team));
+
+
 
 
 

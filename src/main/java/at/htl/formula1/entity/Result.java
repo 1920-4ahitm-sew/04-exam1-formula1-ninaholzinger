@@ -1,5 +1,6 @@
 package at.htl.formula1.entity;
 
+import javax.json.JsonObject;
 import javax.persistence.*;
 
 /**
@@ -7,11 +8,17 @@ import javax.persistence.*;
  * <p>
  * The id's are assigned by the database.
  */
+@Entity
+@Table(name = "F1_RESULT")
+@NamedQueries({
+
+})
 public class Result {
 
     @Transient
     public int[] pointsPerPosition = {0, 25, 18, 15, 12, 10, 8, 6, 4, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @ManyToOne
     private Race race;
@@ -30,6 +37,8 @@ public class Result {
         this.setPosition(position);
         this.setDriver(driver);
     }
+
+
     //endregion
 
 

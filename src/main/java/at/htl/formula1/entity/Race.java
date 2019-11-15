@@ -1,8 +1,6 @@
 package at.htl.formula1.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
@@ -10,8 +8,15 @@ import java.time.LocalDate;
  *
  * The id's are not assigned by the database. The id's are given.
  */
+@Entity
+@Table(name = "F1_RACE")
+@NamedQueries({
+        @NamedQuery(name = "Race.findByRaceNo",query = "select r from Race r where r.id = :RACENO"),
+        @NamedQuery(name = "Race.findWinnerOfRace", query = "select r from Race r where r.country = :COUNTRY")
+})
 public class Race {
 
+    @Id
     private Long id;
     private String country;
     private LocalDate date;
@@ -25,6 +30,8 @@ public class Race {
         this.country = country;
         this.date = date;
     }
+
+
     //endregion
 
     //region Getter and Setter

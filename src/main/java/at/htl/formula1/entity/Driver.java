@@ -7,8 +7,14 @@ import javax.persistence.*;
  * <p>
  * The id's are  assigned by the database.
  */
+@Entity
+@Table(name = "F1_DRIVER")
+@NamedQueries({
+        @NamedQuery(name = "Driver.findByDriverName",query = "select d from Driver d where d.name = :DRIVERNAME")
+})
 public class Driver {
-
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
 

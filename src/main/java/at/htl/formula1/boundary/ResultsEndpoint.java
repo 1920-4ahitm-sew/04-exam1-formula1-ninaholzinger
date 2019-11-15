@@ -1,6 +1,7 @@
 package at.htl.formula1.boundary;
 
 import at.htl.formula1.entity.Driver;
+import at.htl.formula1.entity.Result;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -19,6 +20,8 @@ public class ResultsEndpoint {
      * @param name als QueryParam einzulesen
      * @return JsonObject
      */
+
+
     public JsonObject getPointsSumOfDriver(
             String name
     ) {
@@ -36,6 +39,8 @@ public class ResultsEndpoint {
         return Response.ok(winnerOfCountry).build();*/
         return  null;
     }
+
+
 
 
 

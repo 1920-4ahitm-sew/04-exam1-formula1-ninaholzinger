@@ -30,10 +30,13 @@ public class ResultsEndpoint {
      * @return
      */
     public Response findWinnerOfRace(long id) {
-        return null;
+
+
+        /*Race winnerOfCountry = em.createNamedQuery("Result.findWinnerOfCounty",Result.class).setParameter();
+        return Response.ok(winnerOfCountry).build();*/
+        return  null;
     }
 
 
-    // Ergänzen Sie Ihre eigenen Methoden ...
 
 }

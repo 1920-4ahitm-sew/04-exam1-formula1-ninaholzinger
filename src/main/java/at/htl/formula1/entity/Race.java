@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Table(name = "F1_RACE")
 @NamedQueries({
         @NamedQuery(name = "Race.findByRaceNo",query = "select r from Race r where r.id = :RACENO"),
-        @NamedQuery(name = "Race.findWinnerOfRace", query = "select r from Race r where r.country = :COUNTRY")
+
 })
 public class Race {
 

@@ -59,7 +59,7 @@ public class InitBean {
         ClassLoader classLoader = getClass().getClassLoader();
             File file = new File(classLoader.getResource(racesFileName).getFile());
 
-            try(Scanner scanner = new Scanner(file)){
+            try(Scanner scanner = new Scanner(file, "UTF-8")){
                 scanner.nextLine();
                 while (scanner.hasNextLine()){
                     String[] param = scanner.nextLine().split(";");
@@ -89,7 +89,7 @@ public class InitBean {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource(teamFileName).getFile());
 
-        try(Scanner scanner = new Scanner(file)){
+        try(Scanner scanner = new Scanner(file,"UTF-8")){
             scanner.nextLine();
             while (scanner.hasNextLine()){
                 String[] param = scanner.nextLine().split(";");
@@ -114,19 +114,18 @@ public class InitBean {
      */
 
     private void persistTeamAndDrivers(String[] line) {
-
-        //if(em.createNamedQuery("Team.findExistingTeam", Team.class).setParameter("NAME",line[0]).getSingleResult() == null){
-
-
-            Team  team = new Team(line[0]);
+        Team team = null;
+        try {
+            team = new Team();
+            team = em.createNamedQuery("Team.findExistingTeam", Team.class)
+                    .setParameter("NAME",line[0])
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            team = new Team(line[0]);
             em.persist(team);
-            em.persist(new Driver(line[1],team));
-            em.persist(new Driver(line[2],team));
-
-
-
-
-
+        }
+            em.persist(new Driver(line[1], team));
+            em.persist(new Driver(line[2], team));
     }
 
 }

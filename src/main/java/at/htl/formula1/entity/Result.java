@@ -1,5 +1,7 @@
 package at.htl.formula1.entity;
 
+import jdk.jfr.Name;
+
 import javax.json.JsonObject;
 import javax.persistence.*;
 
@@ -11,7 +13,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "F1_RESULT")
 @NamedQueries({
-
+            @NamedQuery(name = "Result.sumPointsForAllDrivers",query = "select sum(r.points) from Result r where r.driver = (select d.id  from Driver d where d.name = :NAME)"),
+            @NamedQuery(name = "Result.getWinnerOfRace",query = "select r.driver from Result r where r.position = 1 and r.race = (select ra.id from Race ra where ra.country = :COUNTRY)"),
+            @NamedQuery(name = "Result.getAllPoints",query = "select sum(r.points) from Result r where r.driver = :DRIVER"),
+            @NamedQuery(name = "Race.racesWonByTeams",query = "select re.race from Result re where re.position = 1 and re.driver in (select distinct d.id from Driver d where d.team = (select t.id from Team t where t.name like :TEAM))")
 })
 public class Result {
 
